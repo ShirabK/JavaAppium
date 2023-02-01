@@ -1,6 +1,5 @@
 package lib.ui;
 
-import io.appium.java_client.AppiumDriver;
 import lib.Platform;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
@@ -52,7 +51,7 @@ abstract public class NavigationUI extends MainPageObject{
         }
     }
 
-    public void returnArticlePageAfterAuth () {
+    public void returnBackPage() {
         if (Platform.getInstance().isMw()) {
             driver.navigate().back();
         }

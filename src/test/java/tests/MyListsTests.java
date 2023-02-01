@@ -7,7 +7,6 @@ import lib.ui.factories.ArticlePageObjectFactory;
 import lib.ui.factories.MyListsPageObjectFactory;
 import lib.ui.factories.NavigationUIFactory;
 import lib.ui.factories.SearchPageObjectFactory;
-import org.checkerframework.checker.units.qual.A;
 
 public class MyListsTests extends CoreTestCase {
 
@@ -45,7 +44,7 @@ public class MyListsTests extends CoreTestCase {
             Auth.clickAuthButton();
             Auth.enteringLoginData(login, password);
             Auth.submitForm();
-            NavigationUI.returnArticlePageAfterAuth();
+            NavigationUI.returnBackPage();
             NavigationUI.openNavigation();
             NavigationUI.tapOnHome();
 
@@ -55,8 +54,6 @@ public class MyListsTests extends CoreTestCase {
                     article_title,
                     ArticlePageObject.getArticleTitle()
             );*/
-
-            ArticlePageObject.closeArticle();
         }
 
         MyListObject MyListPageObject = MyListsPageObjectFactory.get(driver);
