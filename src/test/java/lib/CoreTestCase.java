@@ -13,7 +13,9 @@ import org.openqa.selenium.ScreenOrientation;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
 
+import java.io.FileOutputStream;
 import java.time.Duration;
+import java.util.Properties;
 
 public class CoreTestCase {
     protected RemoteWebDriver driver;
@@ -22,6 +24,7 @@ public class CoreTestCase {
     @Step("Run driver and session")
     public void setUp () throws Exception{
         driver = Platform.getInstance().getDriver();
+        this.createdAllurePropertyFile();
         this.rotateScreenPortrait();
         this.skipWelcomePageForIOSApp();
         this.openPageWikiPageFromMobileWeb();
@@ -92,7 +95,7 @@ public class CoreTestCase {
         }
     }
 
-    @Step("Step sckip welcome page screen for iOS")
+    @Step("Step skip welcome page screen for iOS")
     private  void skipWelcomePageForIOSApp () {
         if (driver instanceof AppiumDriver) {
             AppiumDriver driver = (AppiumDriver) this.driver;
@@ -102,6 +105,21 @@ public class CoreTestCase {
             }
         } else {
             System.out.println("Method skipWelcomePageForIOSApp() does  nothing for platform " + Platform.getInstance().getPlatformVar());
+        }
+    }
+
+    @Step("Create Allure properties file")
+    private void createdAllurePropertyFile() {
+        String path = System.getProperty("allure.results.directory");
+        try {
+            Properties props = new Properties();
+            FileOutputStream fos = new FileOutputStream(path + "/environment.properties");
+            props.setProperty("Environment", Platform.getInstance().getPlatformVar());
+            props.store(fos, "See https://github.com/allure-framework/allure-app/wiki/Enwironment");
+            fos.close();
+        } catch (Exception e) {
+            System.err.println("IO problem when writing allure properties file");
+            e.printStackTrace();
         }
     }
 }

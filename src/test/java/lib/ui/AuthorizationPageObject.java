@@ -1,5 +1,6 @@
 package lib.ui;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.util.concurrent.TimeUnit;
@@ -16,18 +17,8 @@ public class AuthorizationPageObject extends MainPageObject{
         PASSWORD_INPUT = "css:input[name='wpPassword']",
         SUBMIT_BUTTON = "css:button#wpLoginAttempt";
 
+    @Step("Click button authorization for open form")
     public void clickAuthButton () {
-/*          driver.manage().timeouts().implicitlyWait(10, TimeUnit.MICROSECONDS);
-        this.waitForElementPresent(
-                LOGIN_BUTTON,
-                "Cannot find Auth button",
-                5
-        );
-        this.waitForElementAndClick(
-                LOGIN_BUTTON,
-                "Cannot find and click Auth button",
-                5
-        );*/
        this.tryClickElementWithFewAttempts(
                 LOGIN_BUTTON,
                 "Cannot find Auth button",
@@ -35,6 +26,7 @@ public class AuthorizationPageObject extends MainPageObject{
         );
     }
 
+    @Step("Enter login and password")
     public void enteringLoginData (String login, String password) {
         this.waitForElementAndSendKeys(
                 LOGIN_INPUT,
@@ -50,6 +42,7 @@ public class AuthorizationPageObject extends MainPageObject{
         );
     }
 
+    @Step("Click button for authorization")
     public void submitForm () {
         this.waitForElementAndClick(
                 SUBMIT_BUTTON,

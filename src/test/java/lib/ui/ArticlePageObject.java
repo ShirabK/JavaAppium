@@ -1,6 +1,7 @@
 package lib.ui;
 
 import io.appium.java_client.AppiumDriver;
+import io.qameta.allure.Step;
 import lib.Platform;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -22,6 +23,7 @@ abstract public class ArticlePageObject extends MainPageObject {
     GO_TO_MAIN_PAGE,
     OPTIONS_REMOVE_FROM_MY_LIST_BUTTON;
 
+    @Step("Get xpath folder name in read list")
     private static String getXpathFolderName (String folder_name) {
         return CREATED_FOLDER_IN_MY_LIST.replace("{FOLDER_NAME}", folder_name);
     }
@@ -29,15 +31,19 @@ abstract public class ArticlePageObject extends MainPageObject {
         super(driver);
     }
 
+    @Step("Waiting for title element on the article page")
     public WebElement waitForTitleElement () {
         return this.waitForElementPresent(TITLE, "Cannot find article title on page", 5);
     }
 
+    @Step("Get article title")
     public String getArticleTitle () {
         WebElement title_element = waitForTitleElement();
+        screenshot(this.takeScreenShot("article title"));
         return title_element.getText();
     }
 
+    @Step("Swipe to footer article page")
     public void swipeToFooter () {
         if (Platform.getInstance().isAndroid()) {
             this.swipeUpToFindElement(
@@ -60,6 +66,7 @@ abstract public class ArticlePageObject extends MainPageObject {
         }
     }
 
+    @Step("Add article title to read list with created folder by name '{search_line}'")
     public void addArticleToMyList (String name_of_folder) {
         this.waitForElementAndClick(
                 OPTIONS_BUTTON,
@@ -105,6 +112,7 @@ abstract public class ArticlePageObject extends MainPageObject {
         );
     }
 
+    @Step("Adding the article to my saved articles")
     public void addArticleToMySaved () {
         if (Platform.getInstance().isMw()) {
             this.removeArticleFromSavedIfItAdded();
@@ -116,6 +124,7 @@ abstract public class ArticlePageObject extends MainPageObject {
         );
     }
 
+    @Step("Removing the article from saved if it has been added")
     public void removeArticleFromSavedIfItAdded () {
         if (this.isElementPresent(OPTIONS_REMOVE_FROM_MY_LIST_BUTTON)) {
             this.waitForElementAndClick(
@@ -129,6 +138,7 @@ abstract public class ArticlePageObject extends MainPageObject {
         }
     }
 
+    @Step("Add article to folder in read lists")
     public void addiArticleToCreatedFolderInMyList (String name_of_folder) {
         this.waitForElementAndClick(
                 OPTIONS_BUTTON,
@@ -150,6 +160,7 @@ abstract public class ArticlePageObject extends MainPageObject {
         );
     }
 
+    @Step("Close article")
     public void closeArticle () {
         if ((Platform.getInstance().isIOS()) || Platform.getInstance().isAndroid()) {
             this.waitForElementAndClick(
@@ -162,6 +173,7 @@ abstract public class ArticlePageObject extends MainPageObject {
         }
 
     }
+    @Step("Going to the main page from the article")
     public void GoToMainPage () {
         this.waitForElementAndClick(
                 GO_TO_MAIN_PAGE,

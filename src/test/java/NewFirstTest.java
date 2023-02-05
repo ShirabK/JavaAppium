@@ -7,7 +7,6 @@ import lib.ui.factories.SearchPageObjectFactory;
 import org.junit.Assert;
 import org.junit.Test;
 
-
 public class NewFirstTest extends CoreTestCase{
 
     @Test
@@ -20,7 +19,6 @@ public class NewFirstTest extends CoreTestCase{
         SearchPageObject SearchPageObject = SearchPageObjectFactory.get(driver);
         SearchPageObject.initSearchInput();
         SearchPageObject.typeSearchLine("Appium");
-
     }
 
     @Test

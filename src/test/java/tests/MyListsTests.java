@@ -1,5 +1,7 @@
 package tests;
 
+import io.qameta.allure.*;
+import io.qameta.allure.junit4.DisplayName;
 import lib.CoreTestCase;
 import lib.Platform;
 import lib.ui.*;
@@ -7,12 +9,19 @@ import lib.ui.factories.ArticlePageObjectFactory;
 import lib.ui.factories.MyListsPageObjectFactory;
 import lib.ui.factories.NavigationUIFactory;
 import lib.ui.factories.SearchPageObjectFactory;
+import org.junit.Test;
 
 public class MyListsTests extends CoreTestCase {
 
     private static final String
         login = "Shirab.k",
         password = "KnjJNND94nI@d";
+    @Test
+    @Severity(value = SeverityLevel.BLOCKER)
+    @Features(value = {@Feature(value = "Search"), @Feature(value = "Article"),@Feature(value = "Read list")})
+    @DisplayName("Add article in read list")
+    @Description("Search article 'Object-oriented programming language', add read list and remove")
+    @Step("Start test 'testSaveFirstArticleToMyListTitle'")
     public void testSaveFirstArticleToMyListTitle() {
 
         String name_of_folder = "Java";

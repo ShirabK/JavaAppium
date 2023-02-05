@@ -1,5 +1,6 @@
 package suites;
 
+import Tasks.*;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import tests.*;
@@ -10,8 +11,13 @@ import tests.*;
         SearchTests.class,
         MyListsTests.class,
         getStartedTest.class,
-        FirstTest.class,
-        ChangeAppConditionTests.class
+        ArticleTests.class,
+        ChangeAppConditionTests.class,
+        EX2.class,
+        EX3.class,
+        EX5.class,
+        EX6.class,
+        EX11.class
 }
 )
 

@@ -1,5 +1,6 @@
 package lib.ui;
 
+import io.qameta.allure.Step;
 import lib.Platform;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
@@ -32,9 +33,12 @@ abstract public class MyListObject extends MainPageObject{
         return REMOVE_FROM_SAVED_BUTTON.replace("{TITLE}", article_title);
     }
 
+    @Step("Open folder by name '{search_line}'")
     public void openFolderByName (String name_of_folder) {
 
         String folder_name_xpath = getFolderXpathByName(name_of_folder);
+
+        screenshot(this.takeScreenShot("folder"));
 
         this.waitForElementAndClick(
                 folder_name_xpath,
@@ -44,6 +48,7 @@ abstract public class MyListObject extends MainPageObject{
 
     }
 
+    @Step("Swipe article '{article_title}' to delete")
     public void swipeByArticleToDelete(String article_title) {
 
         this.waitForArticleToAppearByTitle(article_title);
@@ -69,6 +74,7 @@ abstract public class MyListObject extends MainPageObject{
                     5
             );
         }
+        screenshot(this.takeScreenShot("article_after_delete"));
 
         if (Platform.getInstance().isIOS()) {
             this.clickElementToTheRightUpperCorner(
@@ -84,6 +90,7 @@ abstract public class MyListObject extends MainPageObject{
         this.waitForArticleToDisappearByTitle(article_title);
     }
 
+    @Step("Delete article '{FIRST_ARTICLE_BY_JAVA}' from my lists for iOS")
     public void swipeFirstArticleToDeleteForIOS() {
 
         this.swipeElementToLeft(
@@ -101,6 +108,7 @@ abstract public class MyListObject extends MainPageObject{
         this.waitForArticleToDisappearByTitle(FIRST_ARTICLE_BY_JAVA);
     }
 
+    @Step("Delete second article from my lists for iOS")
     public void swipeSecondArticleToDeleteForIOS() {
 
         this.swipeElementToLeft(
@@ -118,6 +126,7 @@ abstract public class MyListObject extends MainPageObject{
         this.waitForArticleToDisappearByTitle(SECOND_ARTICLE_BY_JAVA);
     }
 
+    @Step("Checking for an article")
     public void waitForArticleToAppearByTitle (String article_title) {
 
         String article_xpath = getSavedArticleXpathByTitle(article_title);
@@ -129,10 +138,11 @@ abstract public class MyListObject extends MainPageObject{
         );
     }
 
+    @Step("Checking if an article is missing")
     public void waitForArticleToDisappearByTitle (String article_title) {
 
         String article_xpath = getSavedArticleXpathByTitle(article_title);
-
+        screenshot(this.takeScreenShot("article_after_delete"));
         this.waitForElementNotPresent(
                 article_xpath,
                 "Saved article still present with title " + article_xpath,
@@ -140,6 +150,7 @@ abstract public class MyListObject extends MainPageObject{
         );
     }
 
+    @Step("Checking for an article for iOS")
     public void waitForArticleToDisappearByTitleForIOSFirstArticle() {
 
         this.waitForElementNotPresent(
@@ -148,6 +159,8 @@ abstract public class MyListObject extends MainPageObject{
                 5
         );
     }
+
+    @Step("Checking if an article is missing for iOS")
     public void waitForArticleToDisappearByTitleForIOSSecondArticle() {
 
         this.waitForElementNotPresent(

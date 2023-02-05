@@ -1,5 +1,7 @@
 package Tasks;
 
+import io.qameta.allure.*;
+import io.qameta.allure.junit4.DisplayName;
 import lib.CoreTestCase;
 import lib.ui.MainPageObject;
 import lib.ui.SearchPageObject;
@@ -7,28 +9,16 @@ import lib.ui.factories.SearchPageObjectFactory;
 import org.junit.Test;
 import org.openqa.selenium.By;
 
+@Epic("Home work")
 public class EX2 extends CoreTestCase {
 
     @Test
+    @Severity(value = SeverityLevel.NORMAL)
+    @Feature(value = "Search")
+    @DisplayName("Search field has entered text")
+    @Description("Input in search field text 'Java' and check")
+    @Step("Start test 'testElementHasText'")
     public void testElementHasText () {
-/*        waitForElementAndClick(
-                By.xpath("//*[contains(@text,'Search Wikipedia')]"),
-                "Cannot find 'Search Wikipedia input'",
-                5);
-
-        waitForElementAndSendKeys(
-                By.xpath("//*[contains(@text,'Search…')]"),
-                "Java",
-                "Cannot find search input",
-                5
-        );
-
-        assertElementHasTex(
-                By.id("org.wikipedia:id/search_src_text"),
-                "Java",
-                "Search field not contain 'Java' text",
-                5
-        );*/
         String locator = "//*[@resource-id='org.wikipedia:id/search_src_text']";
         SearchPageObject SearchPageObject = SearchPageObjectFactory.get(driver);
 

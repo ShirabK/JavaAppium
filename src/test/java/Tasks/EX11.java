@@ -1,5 +1,7 @@
 package Tasks;
 
+import io.qameta.allure.*;
+import io.qameta.allure.junit4.DisplayName;
 import lib.CoreTestCase;
 import lib.Platform;
 import lib.ui.*;
@@ -9,12 +11,18 @@ import lib.ui.factories.NavigationUIFactory;
 import lib.ui.factories.SearchPageObjectFactory;
 import org.junit.Test;
 
+@Epic("Home work")
 public class EX11 extends CoreTestCase {
     private static final String
             login = "Shirab.k",
             password = "KnjJNND94nI@d";
 
     @Test
+    @Severity(value = SeverityLevel.BLOCKER)
+    @Features(value = {@Feature(value = "Search"), @Feature(value = "Article"),@Feature(value = "Read list")})
+    @DisplayName("Add two article in read list and remove one")
+    @Description("Adding two articles about anime, removing one from the list and checking the rest")
+    @Step("Start test 'testSavingTwoArticle'")
     public void testSavingTwoArticle () {
 
         String name_of_folder = "Java language";

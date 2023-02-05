@@ -1,5 +1,7 @@
 package tests;
 
+import io.qameta.allure.*;
+import io.qameta.allure.junit4.DisplayName;
 import lib.CoreTestCase;
 import lib.Platform;
 import lib.ui.ArticlePageObject;
@@ -11,6 +13,11 @@ import org.junit.Test;
 
 public class ChangeAppConditionTests extends CoreTestCase {
     @Test
+    @Severity(value = SeverityLevel.BLOCKER)
+    @Features(value = {@Feature(value = "Search"), @Feature(value = "Condition")})
+    @DisplayName("Check change screen orientation")
+    @Description("Check change screen orientation")
+    @Step("Start test 'testChangeScreenOrientationOnSearchResults'")
     public void testChangeScreenOrientationOnSearchResults () {
 
         if (Platform.getInstance().isMw()) {
@@ -47,7 +54,12 @@ public class ChangeAppConditionTests extends CoreTestCase {
     }
 
     @Test
+    @Severity(value = SeverityLevel.BLOCKER)
+    @DisplayName("Checking an article where collapse the application")
+    @Description("Checking an article stays open after collapse the application")
+    @Step("Start test 'testChangeScreenOrientationOnSearchResults'")
     public void testCheckSearchArticleInBackGround () {
+        String result_title = "Object-oriented programming language";
 
         if (Platform.getInstance().isMw()) {
             return;
@@ -56,10 +68,10 @@ public class ChangeAppConditionTests extends CoreTestCase {
         SearchPageObject SearchPageObject = SearchPageObjectFactory.get(driver);
         SearchPageObject.initSearchInput();
         SearchPageObject.typeSearchLine("Java");
-        SearchPageObject.waitForSearchResult("Object-oriented programming language");
+        SearchPageObject.waitForSearchResult(result_title);
 
         this.backgroundApp(3);
 
-        SearchPageObject.waitForSearchResult("Object-oriented programming language");
+        SearchPageObject.waitForSearchResult(result_title);
     }
 }

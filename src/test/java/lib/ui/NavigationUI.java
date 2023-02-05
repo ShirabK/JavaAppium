@@ -1,5 +1,6 @@
 package lib.ui;
 
+import io.qameta.allure.Step;
 import lib.Platform;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
@@ -15,6 +16,7 @@ abstract public class NavigationUI extends MainPageObject{
             BACK_LINK_AFTER_AUTH,
             HOME_LINK;
 
+    @Step("ЩOpen navigation")
     public void openNavigation () {
         if (Platform.getInstance().isMw()) {
             this.waitForElementAndClick(
@@ -27,6 +29,7 @@ abstract public class NavigationUI extends MainPageObject{
         }
     }
 
+    @Step("Tap on home")
     public void tapOnHome () {
         this.tryClickElementWithFewAttempts(
                 HOME_LINK,
@@ -35,6 +38,7 @@ abstract public class NavigationUI extends MainPageObject{
         );
     }
 
+    @Step("Click button 'My lists'")
     public void clickMyLists() {
         if (Platform.getInstance().isMw()) {
             this.tryClickElementWithFewAttempts(
@@ -51,12 +55,14 @@ abstract public class NavigationUI extends MainPageObject{
         }
     }
 
+    @Step("Back page")
     public void returnBackPage() {
         if (Platform.getInstance().isMw()) {
             driver.navigate().back();
         }
     }
 
+    @Step("Tup button 'X' to close auth button")
     public void closeAuthPage () {
         this.waitForElementAndClick(
                 CLOSE_AUTH_IN_SAVED_PAGE,
