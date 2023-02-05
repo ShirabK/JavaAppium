@@ -134,7 +134,7 @@ public class NewFirstTest extends CoreTestCase{
         SearchPageObject.getAmountOfFoundArticle();
 
         int amount_of_search_results = SearchPageObject.getAmountOfFoundArticle();
-        assertTrue(
+        Assert.assertTrue(
                 "We found few results",
                 amount_of_search_results > 0
         );
@@ -165,7 +165,7 @@ public class NewFirstTest extends CoreTestCase{
 
         String title_after_rotation = ArticlePageObject.getArticleTitle();
 
-        assertEquals(
+        Assert.assertEquals(
                 "Article title have been change after rotation",
                 title_before_rotation,
                 title_after_rotation
@@ -175,7 +175,7 @@ public class NewFirstTest extends CoreTestCase{
 
         String title_after_second_rotation = ArticlePageObject.getArticleTitle();
 
-        assertEquals(
+        Assert.assertEquals(
                 "Article title have been change after rotation",
                 title_before_rotation,
                 title_after_second_rotation);

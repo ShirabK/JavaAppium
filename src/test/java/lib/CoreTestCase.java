@@ -4,8 +4,10 @@ import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.touch.WaitOptions;
 import io.appium.java_client.touch.offset.PointOption;
-import junit.framework.TestCase;
+import io.qameta.allure.Step;
 import lib.ui.WelcomePageObject;
+import org.junit.After;
+import org.junit.Before;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.ScreenOrientation;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -13,27 +15,25 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.time.Duration;
 
-public class CoreTestCase extends TestCase {
+public class CoreTestCase {
     protected RemoteWebDriver driver;
 
-    @Override
-    protected void setUp () throws Exception{
-
-        super.setUp();
-
+    @Before
+    @Step("Run driver and session")
+    public void setUp () throws Exception{
         driver = Platform.getInstance().getDriver();
         this.rotateScreenPortrait();
         this.skipWelcomePageForIOSApp();
         this.openPageWikiPageFromMobileWeb();
     }
 
-    @Override
-    protected void tearDown() throws Exception{
+    @After
+    @Step("Remove driver and session")
+    public  void tearDown() throws Exception{
         driver.quit();
-
-        super.tearDown();
     }
 
+    @Step("Rotate scree to portrait mode")
     protected void rotateScreenPortrait () {
         if (driver instanceof AppiumDriver) {
             AppiumDriver driver = (AppiumDriver) this.driver;
@@ -43,6 +43,7 @@ public class CoreTestCase extends TestCase {
         }
     }
 
+    @Step("Rotate scree to landscape mode")
     protected void rotateScreenLandscape () {
         if (driver instanceof AppiumDriver) {
             AppiumDriver driver = (AppiumDriver) this.driver;
@@ -52,6 +53,7 @@ public class CoreTestCase extends TestCase {
         }
     }
 
+    @Step("Send mobile app to background (this methode does nothing for Mobile Web)")
     protected void backgroundApp (int seconds) {
         if (driver instanceof AppiumDriver) {
             AppiumDriver driver = (AppiumDriver) this.driver;
@@ -61,6 +63,7 @@ public class CoreTestCase extends TestCase {
         }
     }
 
+    @Step("Swipe article to up")
     protected void SwipeUp (int timeOfSwipe) {
         if (driver instanceof AppiumDriver) {
             TouchAction action = new TouchAction((AppiumDriver) driver);
@@ -80,6 +83,7 @@ public class CoreTestCase extends TestCase {
         }
     }
 
+    @Step("Open Wikipedia URL for Mobile Web (this methode does nothing for Android and iOS)")
     protected void openPageWikiPageFromMobileWeb() {
         if (Platform.getInstance().isMw()) {
             driver.get("https://en.m.wikipedia.org");
@@ -88,6 +92,7 @@ public class CoreTestCase extends TestCase {
         }
     }
 
+    @Step("Step sckip welcome page screen for iOS")
     private  void skipWelcomePageForIOSApp () {
         if (driver instanceof AppiumDriver) {
             AppiumDriver driver = (AppiumDriver) this.driver;
